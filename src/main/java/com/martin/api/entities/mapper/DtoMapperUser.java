@@ -28,7 +28,11 @@ public class DtoMapperUser {
             this.user.getId(),
             this.user.getName(),
             this.user.getEmail(),
-            this.user.getPhoneList()
+            this.user.getPhoneList(),
+            this.user.getCreatedAt(),
+            this.user.getModifiedAt(),
+            this.user.getLastLogin(),
+            this.user.getActive()
         );
     }
 

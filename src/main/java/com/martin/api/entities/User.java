@@ -1,8 +1,10 @@
 package com.martin.api.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.martin.api.validation.ExistsByEmail;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,13 +13,18 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank(message = "El nombre no puede estar vacio")
     private String name;
+    @ExistsByEmail
+    @NotBlank(message = "El correo electronico no puede estar vacio")
     private String email;
+    @NotBlank(message = "La contraseña no puede estar vacio")
     private String password;
+    @Valid
     @OneToMany(cascade = CascadeType.ALL)
     private List<Phone> phoneList;
     @JsonIgnoreProperties({"users", "handler", "hibernateLazyInitializer"})
@@ -31,9 +38,7 @@ public class User {
     private List<Role> roles;
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
-//    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date createdAt;
-
     private Date modifiedAt;
     private Date lastLogin;
     private Boolean isActive;
@@ -127,5 +132,9 @@ public class User {
 
     public void setPhoneList(List<Phone> phoneList) {
         this.phoneList = phoneList;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 }

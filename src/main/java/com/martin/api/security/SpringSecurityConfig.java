@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +33,9 @@ import java.util.Arrays;
 public class SpringSecurityConfig {
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
+
+    @Autowired
+    private UserService userService;
 
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -49,14 +55,13 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/h2-console/**").permitAll()
                 //USERS ENDPOINTS
                 .requestMatchers(HttpMethod.GET, "/users").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-//                .requestMatchers(HttpMethod.POST, "/users","/users/account").permitAll()
-//                .requestMatchers(HttpMethod.PUT, "/users","/users/{id}").hasAnyRole("USER","ADMIN")
-//                .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasAnyRole("ADMIN")
-                        .anyRequest().authenticated())
-                .headers(head -> head.frameOptions(frameOpt -> frameOpt.disable()))
-                .csrf(config -> config.disable())
-                .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
+                .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PATCH, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users").hasRole("ADMIN")
+                .anyRequest().authenticated())
+                .headers(head -> head.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .csrf(AbstractHttpConfigurer::disable)
+                .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager(), userService))
                 .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
                 .sessionManagement(managment -> managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))

@@ -29,11 +29,10 @@ import static com.martin.api.security.TokenJwtConfig.*;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
-    @Autowired
     private UserService userService;
-
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
 
     @Override
@@ -70,11 +69,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String email = user.getUsername();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
 
-//        userService.updateLastLogin(email);
+        userService.updateLastLogin(email);
 
         Claims claims = Jwts.claims()
                 .add("authorities", new ObjectMapper().writeValueAsString(roles))
-                .add("username", email)
+                .add("email", email)
                 .build();
 
 

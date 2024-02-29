@@ -9,10 +9,16 @@ import java.util.Optional;
 
 public interface UserService {
     List<UserDto> findAll();
+    Optional<User> findById(Long id);
     Optional<UserDto> findByEmail(String email);
-    Optional<UserDto> save(UserRequest userRequest);
+    Optional<UserDto> save(User user);
 
-    Optional<UserDto> update(UserRequest userRequest);
+    Optional<UserDto> update(Long id, UserRequest userRequest);
 
-    Optional<UserDto> updateLastLogin(String email);
+    boolean delete(Long id);
+
+    boolean existsByEmailAndIdNot(String email , Long id);
+    boolean existsByEmail(String email);
+
+    void updateLastLogin(String email);
 }

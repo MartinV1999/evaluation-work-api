@@ -1,15 +1,19 @@
 package com.martin.api.entities.requests;
 
 import com.martin.api.entities.Phone;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
 public class UserRequest {
     private Long id;
+    @NotBlank(message = "El nombre no puede estar vacio")
     private String name;
+    @NotBlank(message = "El correo electronico no puede estar vacio")
+    @Email
     private String email;
     private List<Phone> phoneList;
-    private String password;
 
     public Long getId() {
         return id;
@@ -41,13 +45,5 @@ public class UserRequest {
 
     public void setPhoneList(List<Phone> phoneList) {
         this.phoneList = phoneList;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
