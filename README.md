@@ -21,6 +21,7 @@ Una vez clonado el repositorio se debe iniciar la app dando lugar a que se inser
 
 Si se necesita ver las tablas de la base de datos [hazme click](http://localhost:8080/h2-console) , las credenciales son las siguientes:
 
+- JDBC URL: jdbc:h2:mem:usersdb
 - User Name: admin
 - Pass: sa
 
