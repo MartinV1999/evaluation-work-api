@@ -40,7 +40,8 @@ Esto retornará un token JWT necesario para acceder a los siguientes endpoints:
 
 - Para registrar usuarios, tipo petición **GET** : ``` http://localhost:8080/users ```, se devuelve un listado de usuarios en formato JSON.
 
-Para acceder a los siguientes endpoints es necesario enviar el token con el header **Authorization** y el valor **Bearer tokenRecibido**
+> [!IMPORTANT]
+> Para acceder a los siguientes endpoints es necesario enviar el token con el header **Authorization** y el valor **Bearer tokenRecibido** , ejemplo en postman:
 
 ![Ejemplo](https://github.com/MartinV1999/evaluation-work-api/blob/main/headerAuthorization.png)
 
