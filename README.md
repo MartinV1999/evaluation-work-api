@@ -10,7 +10,7 @@ Aplicación que permite registrar usuarios, editarlos y eliminarlos.
 
 ## Documentación
 
-Documentos
+Para ver los diagramas [haz click aqui](https://drive.google.com/drive/folders/1VgjkeIwZupgsehhBHyFuk-TEteReP0DR?usp=sharing)
 
 ## Guía de uso
 
@@ -36,9 +36,13 @@ Para iniciar sesión se debe hacer una petición **POST** a ``` http://localhost
 
 Esto retornará un token JWT necesario para acceder a los siguientes endpoints:
 
-## Lsitado de Usuarios
+## Listado de Usuarios
 
 - Para registrar usuarios, tipo petición **GET** : ``` http://localhost:8080/users ```, se devuelve un listado de usuarios en formato JSON.
+
+Para acceder a los siguientes endpoints es necesario enviar el token con el header **Authorization** y el valor **Bearer tokenRecibido**
+
+(Ejemplo)[https://drive.google.com/file/d/1an9RsXiYvs0GBFzHZpDMEngxt-nCgJrE/view?usp=drive_link]
 
 ## Registro de Usuarios
 
