@@ -42,7 +42,7 @@ Esto retornará un token JWT necesario para acceder a los siguientes endpoints:
 
 Para acceder a los siguientes endpoints es necesario enviar el token con el header **Authorization** y el valor **Bearer tokenRecibido**
 
-[Ejemplo](https://drive.google.com/file/d/1an9RsXiYvs0GBFzHZpDMEngxt-nCgJrE/view?usp=drive_link)
+![Ejemplo](https://drive.google.com/file/d/1an9RsXiYvs0GBFzHZpDMEngxt-nCgJrE/view?usp=drive_link)
 
 ## Registro de Usuarios
 
