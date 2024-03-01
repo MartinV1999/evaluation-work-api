@@ -42,7 +42,7 @@ Esto retornará un token JWT necesario para acceder a los siguientes endpoints:
 
 Para acceder a los siguientes endpoints es necesario enviar el token con el header **Authorization** y el valor **Bearer tokenRecibido**
 
-![Ejemplo](https://raw.githubusercontent.com/MartinV1999/evaluation-work-api/master/ejemplo.png)
+![Ejemplo](https://github.com/MartinV1999/evaluation-work-api/blob/main/headerAuthorization.png)
 
 ## Registro de Usuarios
 
